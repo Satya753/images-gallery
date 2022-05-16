@@ -2,6 +2,7 @@ import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./components/Header";
 import Search from "./components/Search";
+import Welcome from "./components/Welcome";
 import ImageCard from "./components/ImageCard";
 import { Container, Row, Col } from "react-bootstrap";
 
@@ -38,13 +39,14 @@ function App() {
       <Header title="Images Gallery"></Header>
       <Search word={word} setWord={setWord} handleSubmit={handleSearchSubmit} />
       <Container className = "mt-4">
-        <Row xs={1} md={2} lg={3}>
+        {images.length ?<Row xs={1} md={2} lg={3}>
           {images.map((image, i) => (
             <Col key = {i}>
               <ImageCard  image={image} deleteImage = {handleDeleteImage} />
             </Col>
           ))}
-        </Row>
+        </Row> : <Welcome/> }
+        
       </Container>
     </div>
   );
