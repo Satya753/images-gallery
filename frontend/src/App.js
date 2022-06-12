@@ -45,8 +45,16 @@ function App() {
     setWord("");
   };
 
-  const handleDeleteImage = (id) => {
-    setImages(images.filter((image) => image.id!==id));
+  const handleDeleteImage = async (id) => {
+    try{
+      const res = await axios.delete(`http://127.0.0.1:5050/images/${id}`)
+      setImages(images.filter((image) => image.id!==res));
+      getSavedImages()
+    }
+    catch(error){
+      console.log(error)
+    }
+   
   };
 
   const handleSaveImage = async (id) =>{
